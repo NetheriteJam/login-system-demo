@@ -1,6 +1,7 @@
 import mainRouter from './main.js';
 import testRouter from './test.js';
 import signUpRouter from './signUp.js';
+import signInRouter from './signIn.js';
 import express from 'express';
 
 const app = express();
@@ -10,6 +11,8 @@ const port = 25565;
 app.use(mainRouter);
 
 app.use('/signup', signUpRouter);
+
+app.use('/signin', signInRouter);
 
 app.use('/test', testRouter);
 
