@@ -2,6 +2,8 @@ import express from 'express';
 import path from 'path';
 import url from 'url';
 import bodyParser from 'body-parser';
+import server from './index.js';
+import Client from './client.js';
 
 const signUpRouter = express.Router();
 
@@ -33,9 +35,14 @@ signUpRouter.get('/', (req, res, next) => {
 signUpRouter.post('/', (req, res, next) => {
 	const {username, password} = req.body;
 
-	// some magic
+	if ( server.signUp(username, password) ) {
+		server.addClient(req.session.id, new Client(username));
+		req.session.loggedIn = true;
+		res.send('Signed up!<br><a href="/">Back<a/>');
 
-	res.send('Signed up!<br><a href="/">Back<a/>');
+	} else {
+		res.send('Sign up failed!<br><a href="/">Back<a/>');
+	}
 });
 
 export default signUpRouter;
