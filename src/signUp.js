@@ -24,24 +24,18 @@ signUpRouter.get('/', (req, res, next) => {
 			if ( err ) {
 				next(err);
 			} else {
-				console.log('Sent: ', fileName);
+				// console.log('Sent: ', fileName);
 			}
 		}
 	);
-	next();
 });
 
 signUpRouter.post('/', (req, res, next) => {
-	const {username, password} = req;
+	const {username, password} = req.body;
 
 	// some magic
 
 	res.send('Signed up!<br><a href="/">Back<a/>');
-	next();
-});
-
-signUpRouter.all('/', (req, res, next) => {
-	console.log(req.method);
 });
 
 export default signUpRouter;
